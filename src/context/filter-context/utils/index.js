@@ -1,1 +1,1 @@
-export { filterReducerFnc } from './filterReducerFnc'
+export { sortByFilter } from './sortByFilter'

@@ -1,6 +1,12 @@
 import { data } from '../api/productsData'
+import { useFilter } from '../context/filter-context/filter-context'
+import { sortByFilter } from '../context/filter-context/utils/index'
 
 export default function Products() {
+  const { state } = useFilter()
+  const { sortBy } = state
+  const sortedProducts = sortByFilter(sortBy, data)
+
   return (
     <div className='products-wrapper'>
       <div className='products-showcase'>
@@ -9,7 +15,7 @@ export default function Products() {
         </div>
         <div className='products-section-change' />
         <div className='products-showcase-items w-full d-flex justify-content-center align-items-center flex-wrap'>
-          {data.map(
+          {sortedProducts.map(
             ({ id, name, image, ratings, price, inStock, fastDelivery }) => (
               <div className='ecomm-card rounded-5' key={id}>
                 <button className='wishlist-btn'>

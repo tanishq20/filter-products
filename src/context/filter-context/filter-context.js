@@ -1,12 +1,12 @@
 import { createContext, useContext, useReducer } from 'react'
-import { filterReducerFnc } from './utils/index'
+import { filterReducerFnc } from './filterReducerFnc'
 
 const FilterContext = createContext()
 
 const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(filterReducerFnc, {
     sortBy: '',
-    inStock: false,
+    outOfStock: false,
     fastDelivery: false,
     priceRange: 1000,
   })

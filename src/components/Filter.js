@@ -1,4 +1,9 @@
+import { useFilter } from '../context/filter-context/filter-context'
+
 export default function Filter() {
+  const { state, dispatch } = useFilter()
+  const { sortBy } = state
+
   return (
     <div className='filter-wrapper'>
       <div className='filter-showcase'>
@@ -11,6 +16,7 @@ export default function Filter() {
               cursor: 'pointer',
             }}
             className='filter-heading-right'
+            onClick={() => dispatch({ type: 'CLEAR_FILTER' })}
           >
             Clear All
           </button>
@@ -172,28 +178,30 @@ export default function Filter() {
                 <div className='input-selector'>
                   <input
                     type='radio'
-                    name='sorting'
-                    id='low-to-high-radio'
+                    name='sort-price'
+                    id='low-to-high'
                     className='input-selector-field'
+                    checked={sortBy === 'low-to-high' ? true : false}
+                    onChange={() =>
+                      dispatch({ type: 'LOW_TO_HIGH', payload: 'low-to-high' })
+                    }
                   />
-                  <label
-                    htmlFor='low-to-high-radio'
-                    className='input-selector-label'
-                  >
+                  <label htmlFor='low-to-high' className='input-selector-label'>
                     Price - Low to High
                   </label>
                 </div>
                 <div className='input-selector'>
                   <input
                     type='radio'
-                    name='sorting'
-                    id='high-to-low-radio'
+                    name='sort-price'
+                    id='high-to-low'
                     className='input-selector-field'
+                    checked={sortBy === 'high-to-low' ? true : false}
+                    onChange={() =>
+                      dispatch({ type: 'HIGH_TO_LOW', payload: 'high-to-low' })
+                    }
                   />
-                  <label
-                    htmlFor='high-to-low-radio'
-                    className='input-selector-label'
-                  >
+                  <label htmlFor='high-to-low' className='input-selector-label'>
                     Price - High to Low
                   </label>
                 </div>
