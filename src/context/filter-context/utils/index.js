@@ -1,0 +1,1 @@
+export { filterReducerFnc } from './filterReducerFnc'

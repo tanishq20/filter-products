@@ -1,11 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
+import { FilterProvider } from './context/filter-context/filter-context'
 import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <FilterProvider>
+      <App />
+    </FilterProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
