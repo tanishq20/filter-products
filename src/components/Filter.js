@@ -2,7 +2,7 @@ import { useFilter } from '../context/filter-context/filter-context'
 
 export default function Filter() {
   const { state, dispatch } = useFilter()
-  const { sortBy } = state
+  const { sortBy, outOfStock } = state
 
   return (
     <div className='filter-wrapper'>
@@ -217,9 +217,15 @@ export default function Filter() {
                   <input
                     type='checkbox'
                     name='filter'
-                    id
+                    id='availability-checkbox'
                     className='input-selector-field'
-                    defaultChecked
+                    checked={outOfStock ? true : false}
+                    onChange={(e) =>
+                      dispatch({
+                        type: 'OUT_OF_STOCK',
+                        payload: e.target.checked,
+                      })
+                    }
                   />
                   <label
                     htmlFor='availability-checkbox'

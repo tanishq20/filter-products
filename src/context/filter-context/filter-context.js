@@ -6,7 +6,7 @@ const FilterContext = createContext()
 const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(filterReducerFnc, {
     sortBy: '',
-    outOfStock: false,
+    outOfStock: true,
     fastDelivery: false,
     priceRange: 1000,
   })

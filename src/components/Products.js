@@ -1,11 +1,15 @@
 import { data } from '../api/productsData'
 import { useFilter } from '../context/filter-context/filter-context'
-import { sortByFilter } from '../context/filter-context/utils/index'
+import {
+  sortByFilter,
+  outOfStockFilter,
+} from '../context/filter-context/utils/index'
 
 export default function Products() {
   const { state } = useFilter()
-  const { sortBy } = state
+  const { sortBy, outOfStock } = state
   const sortedProducts = sortByFilter(sortBy, data)
+  const outOfStockProducts = outOfStockFilter(outOfStock, sortedProducts)
 
   return (
     <div className='products-wrapper'>
@@ -15,7 +19,7 @@ export default function Products() {
         </div>
         <div className='products-section-change' />
         <div className='products-showcase-items w-full d-flex justify-content-center align-items-center flex-wrap'>
-          {sortedProducts.map(
+          {outOfStockProducts.map(
             ({ id, name, image, ratings, price, inStock, fastDelivery }) => (
               <div className='ecomm-card rounded-5' key={id}>
                 <button className='wishlist-btn'>

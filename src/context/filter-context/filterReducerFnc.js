@@ -4,11 +4,13 @@ export const filterReducerFnc = (state, action) => {
       return { ...state, sortBy: action.payload }
     case 'HIGH_TO_LOW':
       return { ...state, sortBy: action.payload }
+    case 'OUT_OF_STOCK':
+      return { ...state, outOfStock: action.payload }
     case 'CLEAR_FILTER':
       return {
         ...state,
         sortBy: '',
-        outOfStock: false,
+        outOfStock: true,
         fastDelivery: false,
         priceRange: 1000,
       }
