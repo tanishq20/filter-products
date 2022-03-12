@@ -2,24 +2,31 @@ import { data } from '../api/productsData'
 import { useFilter } from '../context/filter-context/filter-context'
 import {
   sortByFilter,
+  fastDeliveryFilter,
   outOfStockFilter,
 } from '../context/filter-context/utils/index'
 
 export default function Products() {
   const { state } = useFilter()
-  const { sortBy, outOfStock } = state
+  const { sortBy, outOfStock, fastDelivery } = state
   const sortedProducts = sortByFilter(sortBy, data)
   const outOfStockProducts = outOfStockFilter(outOfStock, sortedProducts)
+  const fastDeliveryProducts = fastDeliveryFilter(
+    fastDelivery,
+    outOfStockProducts
+  )
 
   return (
     <div className='products-wrapper'>
       <div className='products-showcase'>
         <div className='products-showcase-heading d-flex justify-content-between align-items-center flex-wrap'>
-          <h2 className='products-showcase-head'>Showing All Products</h2>
+          <h2 className='products-showcase-head'>
+            Showing All Products ({fastDeliveryProducts.length})
+          </h2>
         </div>
         <div className='products-section-change' />
         <div className='products-showcase-items w-full d-flex justify-content-center align-items-center flex-wrap'>
-          {outOfStockProducts.map(
+          {fastDeliveryProducts.map(
             ({ id, name, image, ratings, price, inStock, fastDelivery }) => (
               <div className='ecomm-card rounded-5' key={id}>
                 <button className='wishlist-btn'>

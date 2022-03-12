@@ -1,8 +1,9 @@
+import { data } from '../api/productsData'
 import { useFilter } from '../context/filter-context/filter-context'
 
 export default function Filter() {
   const { state, dispatch } = useFilter()
-  const { sortBy, outOfStock } = state
+  const { sortBy, outOfStock, fastDelivery } = state
 
   return (
     <div className='filter-wrapper'>
@@ -210,13 +211,42 @@ export default function Filter() {
           </div>
           <div className='products-section-change' />
           <div className='filter-subcontent'>
+            <div className='filter-subcontent-heading'>Fast Delivery</div>
+            <div className='filter-subcontent-body'>
+              <div className='filter-availability d-flex flex-col'>
+                <div className='input-selector'>
+                  <input
+                    type='checkbox'
+                    name='fast-delivery-filter'
+                    id='fast-delivery-checkbox'
+                    className='input-selector-field'
+                    checked={fastDelivery ? true : false}
+                    onChange={(e) =>
+                      dispatch({
+                        type: 'FAST_DELIVERY',
+                        payload: e.target.checked,
+                      })
+                    }
+                  />
+                  <label
+                    htmlFor='fast-delivery-checkbox'
+                    className='input-selector-label'
+                  >
+                    Fast Delivery
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='products-section-change' />
+          <div className='filter-subcontent'>
             <div className='filter-subcontent-heading'>Availability</div>
             <div className='filter-subcontent-body'>
               <div className='filter-availability d-flex flex-col'>
                 <div className='input-selector'>
                   <input
                     type='checkbox'
-                    name='filter'
+                    name='availability-filter'
                     id='availability-checkbox'
                     className='input-selector-field'
                     checked={outOfStock ? true : false}
