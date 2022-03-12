@@ -5,10 +5,11 @@ const FilterContext = createContext()
 
 const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(filterReducerFnc, {
-    sortBy: '',
-    outOfStock: true,
-    fastDelivery: false,
     priceRange: 1000,
+    rating: null,
+    sortBy: '',
+    fastDelivery: false,
+    outOfStock: true,
   })
   return (
     <FilterContext.Provider value={{ state, dispatch }}>

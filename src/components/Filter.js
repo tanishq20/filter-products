@@ -2,7 +2,7 @@ import { useFilter } from '../context/filter-context/filter-context'
 
 export default function Filter() {
   const { state, dispatch } = useFilter()
-  const { sortBy, outOfStock, fastDelivery, priceRange } = state
+  const { priceRange, rating, sortBy, fastDelivery, outOfStock } = state
 
   return (
     <div className='filter-wrapper'>
@@ -28,7 +28,7 @@ export default function Filter() {
             <div className='filter-subcontent-body'>
               <div className='filter-price d-flex align-items-center justify-content-between'>
                 <div className='price-item'>₹5000</div>
-                <div className='price-item'>₹40000</div>
+                <div className='price-item'>to</div>
                 <div className='price-item'>₹80000</div>
               </div>
               <div className='slider-wrapper'>
@@ -38,7 +38,7 @@ export default function Filter() {
                   max={1000}
                   step={100}
                   className='slider'
-                  id='price-range-datalist'
+                  list='price-range-datalist'
                   value={priceRange}
                   onChange={(e) =>
                     dispatch({ type: 'PRICE_RANGE', payload: e.target.value })
@@ -57,8 +57,8 @@ export default function Filter() {
                   <option value='900'></option>
                   <option value='1000' label='1000'></option>
                 </datalist>
-                <h5>{priceRange}</h5>
               </div>
+              <h5>{priceRange}</h5>
             </div>
           </div>
           <div className='products-section-change' />
@@ -136,6 +136,8 @@ export default function Filter() {
                     name='rating'
                     id='four-star-radio'
                     className='input-selector-field'
+                    checked={rating === 4 ? true : false}
+                    onChange={() => dispatch({ type: 'RATING', payload: 4 })}
                   />
                   <label
                     htmlFor='four-star-radio'
@@ -150,6 +152,8 @@ export default function Filter() {
                     name='rating'
                     id='three-star-radio'
                     className='input-selector-field'
+                    checked={rating === 3 ? true : false}
+                    onChange={() => dispatch({ type: 'RATING', payload: 3 })}
                   />
                   <label
                     htmlFor='three-star-radio'
@@ -164,6 +168,8 @@ export default function Filter() {
                     name='rating'
                     id='two-star-radio'
                     className='input-selector-field'
+                    checked={rating === 2 ? true : false}
+                    onChange={() => dispatch({ type: 'RATING', payload: 2 })}
                   />
                   <label
                     htmlFor='two-star-radio'
@@ -178,6 +184,8 @@ export default function Filter() {
                     name='rating'
                     id='one-star-radio'
                     className='input-selector-field'
+                    checked={rating === 1 ? true : false}
+                    onChange={() => dispatch({ type: 'RATING', payload: 1 })}
                   />
                   <label
                     htmlFor='one-star-radio'

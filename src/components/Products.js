@@ -2,6 +2,7 @@ import { data } from '../api/productsData'
 import { useFilter } from '../context/filter-context/filter-context'
 import {
   priceRangeFilter,
+  ratingFilter,
   sortByFilter,
   fastDeliveryFilter,
   outOfStockFilter,
@@ -9,7 +10,7 @@ import {
 
 export default function Products() {
   const { state } = useFilter()
-  const { priceRange, sortBy, outOfStock, fastDelivery } = state
+  const { priceRange, rating, sortBy, outOfStock, fastDelivery } = state
   const sortedProducts = sortByFilter(sortBy, data)
   const outOfStockProducts = outOfStockFilter(outOfStock, sortedProducts)
   const fastDeliveryProducts = fastDeliveryFilter(
@@ -17,18 +18,19 @@ export default function Products() {
     outOfStockProducts
   )
   const priceRangeProducts = priceRangeFilter(priceRange, fastDeliveryProducts)
+  const ratingProducts = ratingFilter(rating, priceRangeProducts)
 
   return (
     <div className='products-wrapper'>
       <div className='products-showcase'>
         <div className='products-showcase-heading d-flex justify-content-between align-items-center flex-wrap'>
           <h2 className='products-showcase-head'>
-            Showing All Products ({priceRangeProducts.length})
+            Showing All Products ({ratingProducts.length})
           </h2>
         </div>
         <div className='products-section-change' />
         <div className='products-showcase-items w-full d-flex justify-content-center align-items-center flex-wrap'>
-          {priceRangeProducts.map(
+          {ratingProducts.map(
             ({ id, name, image, ratings, price, inStock, fastDelivery }) => (
               <div className='ecomm-card rounded-5' key={id}>
                 <button className='wishlist-btn'>
