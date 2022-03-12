@@ -1,5 +1,7 @@
 export const filterReducerFnc = (state, action) => {
   switch (action.type) {
+    case 'PRICE_RANGE':
+      return { ...state, priceRange: action.payload }
     case 'LOW_TO_HIGH':
       return { ...state, sortBy: action.payload }
     case 'HIGH_TO_LOW':
@@ -11,10 +13,10 @@ export const filterReducerFnc = (state, action) => {
     case 'CLEAR_FILTER':
       return {
         ...state,
-        sortBy: '',
-        outOfStock: true,
-        fastDelivery: false,
         priceRange: 1000,
+        sortBy: '',
+        fastDelivery: false,
+        outOfStock: true,
       }
     default:
       return state

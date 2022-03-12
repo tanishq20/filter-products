@@ -1,9 +1,8 @@
-import { data } from '../api/productsData'
 import { useFilter } from '../context/filter-context/filter-context'
 
 export default function Filter() {
   const { state, dispatch } = useFilter()
-  const { sortBy, outOfStock, fastDelivery } = state
+  const { sortBy, outOfStock, fastDelivery, priceRange } = state
 
   return (
     <div className='filter-wrapper'>
@@ -35,11 +34,30 @@ export default function Filter() {
               <div className='slider-wrapper'>
                 <input
                   type='range'
-                  min={1}
-                  max={100}
-                  defaultValue={50}
+                  min={0}
+                  max={1000}
+                  step={100}
                   className='slider'
+                  id='price-range-datalist'
+                  value={priceRange}
+                  onChange={(e) =>
+                    dispatch({ type: 'PRICE_RANGE', payload: e.target.value })
+                  }
                 />
+                <datalist id='price-range-datalist'>
+                  <option value='0' label='0'></option>
+                  <option value='100'></option>
+                  <option value='200'></option>
+                  <option value='300'></option>
+                  <option value='400'></option>
+                  <option value='500' label='500'></option>
+                  <option value='600'></option>
+                  <option value='700'></option>
+                  <option value='800'></option>
+                  <option value='900'></option>
+                  <option value='1000' label='1000'></option>
+                </datalist>
+                <h5>{priceRange}</h5>
               </div>
             </div>
           </div>
